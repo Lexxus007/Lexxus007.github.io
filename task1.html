@@ -7,7 +7,7 @@
             document.querySelector("#btn").addEventListener("click", function(){
                 if (window.Worker) {
                     //Вызов конструктора Worker()
-                    let worker = new Worker("worker3.js");
+                    let worker = new Worker("worker.js");
                     let first = document.querySelector('#number1');
                     let second = document.querySelector('#number2');
                     let result = document.querySelector('p');
