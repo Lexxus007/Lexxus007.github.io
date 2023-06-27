@@ -4,38 +4,36 @@
     <title>Web Workers</title>
     <script>
         window.onload=function(){
-            document.querySelector("#btn").addEventListener("click", function(){
-                if (window.Worker) {
-                    //Вызов конструктора Worker()
-                    let worker = new Worker("worker.js");
-                    let first = document.querySelector('#number1');
-                    let second = document.querySelector('#number2');
-                    let result = document.querySelector('p');
-                    
-                    first.onchange = function () {
-                        //отправка данных на Worker в ввиде массива
-                        worker.postMessage([first.value, second.value]); 
-                        console.log('Сообщение отправлено');
-                    };
+        if (window.Worker) {
+        //Вызов конструктора Worker()
+        var worker = new Worker("worker2.js");
+        var first = document.querySelector('#number1');
+        var second = document.querySelector('#number2');
+        var result = document.querySelector('p');
+           
+        first.onchange = function () {
+            //отправка данных на Worker в ввиде массива
+                worker.postMessage([first.value, second.value]); 
+                console.log('Сообщение отправлено');
+            };
 
-                    second.onchange = function () {
-                        worker.postMessage([first.value, second.value]);
-                        console.log('Сообщение отправлено');
-                    };
+            second.onchange = function () {
+                worker.postMessage([first.value, second.value]);
+                console.log('Сообщение отправлено');
+            };
 
-                    worker.onmessage = function (e) {
-                        result.textContent = e.data;
-                        console.log('Сообщение получено');
-                    };
-                }
-            }, false);
+            worker.onmessage = function (e) {
+                result.textContent = e.data;
+                console.log('Сообщение получено');
+            };
+        }
         }
     </script>
 </head>
 <body>
     <h1>Пример расчета значения в потоке</h1>
     
-        <form>
+        <form border="1">
             <div>
                 <label for="number1">Число 1: </label>
                 <input type="text" id="number1" value="0">
@@ -46,6 +44,6 @@
             </div>
         </form>
         <p>Результат: 0</p>
-        <input type="button" value="GO" id="btn">
+   
 </body>
 </html>
