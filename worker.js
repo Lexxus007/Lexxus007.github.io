@@ -1,6 +1,16 @@
-onmessage = function (e) {
-    console.log('Получено сообщение от основного потока');
-    var workerResult = 'Результат: ' + (e.data[0] * e.data[1]);
-    console.log('Отправка сообщения в основной поток');
-    postMessage(workerResult);
+function calcFib(x) {
+    if (x > 1) {
+        return calcFib(x - 1) + calcFib(x - 2);
+    }
+    else {
+        return x;
+    }
 }
+
+addEventListener("message", function () {
+
+    for (var i = 0; i < 50; i++) {
+        postMessage(i + " = " + calcFib(i) + "<br />");
+    }
+
+}, false);
