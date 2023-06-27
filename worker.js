@@ -1,5 +1,6 @@
-onmessage = function (e){
-    console.log("step 5");
-    postMessage(e.data);
-    console.log("step 6");
+onmessage = function (e) {
+    console.log('Получено сообщение от основного потока');
+    var workerResult = 'Результат: ' + (e.data[0] * e.data[1]);
+    console.log('Отправка сообщения в основной поток');
+    postMessage(workerResult);
 }
